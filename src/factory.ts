@@ -3,6 +3,7 @@ import { materialize } from 'rxjs/operators';
 
 import { NGRX_ACTIONS_META, StoreMetadata } from './internals';
 import { NgrxSelect } from './select';
+import { stripCmp } from './of-action';
 
 export function createReducer<TState = any>(
   store:
@@ -22,7 +23,8 @@ export function createReducer<TState = any>(
   const { initialState, actions, effects } = klass[NGRX_ACTIONS_META] as StoreMetadata;
 
   return function(state: any = initialState, action: Action) {
-    const actionMeta = actions[action.type];
+    const strippedAction = stripCmp(action.type);
+    const actionMeta = actions[strippedAction];
     if (actionMeta) {
       const result = instance[actionMeta.fn](state, action);
       if (result === undefined) {

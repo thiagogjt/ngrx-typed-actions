@@ -10,6 +10,16 @@ export function ofAction(...allowedTypes: ActionType[]): OperatorFunction<Action
   const allowedMap = {};
   allowedTypes.forEach(klass => (allowedMap[new klass().type] = true));
   return filter((action: Action) => {
-    return allowedMap[action.type];
+    const strippedType = stripCmp(action.type);
+    return allowedMap[strippedType];
   });
+}
+
+export function stripCmp(type: string): string {
+  const closingBracketIdx = type.indexOf(']');
+  if (closingBracketIdx === -1) {
+    return type;
+  }
+  const stripped = type.slice(closingBracketIdx + 2);
+  return stripped;
 }
