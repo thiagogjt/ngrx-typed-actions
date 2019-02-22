@@ -3,7 +3,6 @@ import { ActionsSubject } from '@ngrx/store';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'environments/environment';
 
 interface H {
   type: string;
@@ -14,10 +13,6 @@ export class ActionsService {
   constructor(private actionsSubject: ActionsSubject) {}
 
   dispatch<T extends Action, K extends keyof T>(context: any, action: Type<T>, payload: Exclude<T[K], H> = null) {
-    if (environment.production) {
-      this.actionsSubject.next(new action(payload));
-      return;
-    }
     const callingCmp: string = context.__proto__.constructor.name;
     const instance: T = new action(payload);
     instance.type = `[${callingCmp}] ${instance.type}`;
@@ -28,7 +23,7 @@ export class ActionsService {
 export const debugTypeMap = (effect: string) => (source: Observable<any>): Observable<any> => {
   return source.pipe(
     map(res => {
-      if (!res.type || environment.production) {
+      if (!res.type) {
         return res;
       }
       if (res.type) {
