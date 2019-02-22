@@ -1,5 +1,5 @@
 {
-  "name": "ngrx-actions",
+  "name": "ngrx-typed-actions",
   "version": "7.0.0",
   "description": "Actions and Reducer Utility Library for NGRX",
   "main": "dist/index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kmiskiewicz/ngrx-actions.git"
+    "url": "git+https://github.com/kmiskiewicz/ngrx-typed-actions.git"
   },
   "keywords": [
     "ngrx",
@@ -25,9 +25,9 @@
   "author": "Austin McDaniel, Krzysztof Miśkiewicz, Arturn Maciejaszek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kmiskiewicz/ngrx-actions/issues"
+    "url": "https://github.com/kmiskiewicz/ngrx-typed-actions/issues"
   },
-  "homepage": "https://github.com/kmiskiewicz/ngrx-actions#readme",
+  "homepage": "https://github.com/kmiskiewicz/ngrx-typed-actions#readme",
   "peerDependencies": {
     "@angular/core": "^7.2.6",
     "@ngrx/effects": "^7.2.0",
