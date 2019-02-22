@@ -192,7 +192,7 @@ export class MyComponent {
     @Select((state) => state.color) color$: Observable<string>;
 
     // Array of props
-    @Select(['my', 'prop', 'color']) color$: Observable<strinv>;
+    @Select(['my', 'prop', 'color']) color$: Observable<string>;
 
     // Deeply nested properties
     @Select('my.prop.color') color$: Observable<string>;
@@ -225,6 +225,11 @@ And you can start using it in any component. It also works with feature stores t
 - _Does it support AoT?_ Yes but see above example for details on implementation.
 - _Does this work with NGRX Dev Tools?_ Yes, it does.
 - _How does it work with testing?_ Everything should work the same way but don't forget if you use the selector tool to include that in your test runner though.
+
+## Donation
+If this project help you reduce time to develop, you can give me a cup of coffee :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BA4EV8ALWCVYE&lc=US&item_name=NgrxActions&no_note=0&cn=Dodaj%20specjalne%20instrukcje%20dla%20sprzedaj%c4%85cego%3a&no_shipping=2&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 ## Community
 - [Reducing Boilerplate with NGRX-ACTIONS](https://medium.com/@amcdnl/reducing-the-boilerplate-with-ngrx-actions-8de42a190aac)
