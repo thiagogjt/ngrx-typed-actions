@@ -1,3 +1,7 @@
+# 7.0.0 - 6/5/18
+- debug information added (check in the documentation) 
+- BREAKING: Angular7/Rx6/NGRX7 Support
+
 # 4.0.0 - 6/5/18
 - BREAKING: Angular/Rx6 Support
 

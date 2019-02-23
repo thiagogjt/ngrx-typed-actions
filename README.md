@@ -13,7 +13,10 @@ Inspired by [redux-act](https://github.com/pauldijou/redux-act) and [redux-actio
 
 See [changelog](CHANGELOG.md) for latest changes.
 
-**NOTE: I recommend checking out my latest library called [NGXS](https://github.com/amcdnl/ngxs).**
+## Why it's a fork
+
+Yes, it's a fork from a project created by [amcdnl](https://github.com/amcdnl/ngrx-actions), he made a great work but the project recently haven't been mainteded, that's why we decided to continue his great work. 
+
 
 ## Whats this for?
 This is _sugar_ to help reduce boilerplate when using Redux patterns. That said, here's the high level of what it provides:
@@ -37,7 +40,7 @@ Next, create an action just like you do with NGRX today:
 
 ```javascript
 export class MyAction {
-  readonly type = 'My Action';
+  readonly type = 'MyAction';
   constructor(public payload: MyObj) {}
 }
 ```
@@ -218,6 +221,31 @@ export class AppModule {}
 
 And you can start using it in any component. It also works with feature stores too. Note: The Select decorator has a limitation of lack of type checking due to [TypeScript#4881](https://github.com/Microsoft/TypeScript/issues/4881).
 
+### Debug information 
+- We introduced a new ActionsService which allow to dispatch actions with extra information about component which triggered the action. This helps a lot when you use the same action in multiple places and have to debug from where the action has been triggered. Let's say that we trigger an action from a HeaderComponent, in the Redux DevTools we will see "[ HeaderComponent ] MyAction"
+To use it:
+```javascript
+//just import the ActionsService 
+private actionsService: ActionsService,
+//sample action declaration
+export class MyAction {
+  readonly type = 'MyAction';
+  constructor(public payload: MyObj) {}
+}
+//let's say we trigger the action from e.g. HeaderComponent, in the Redux DevTools we will see, [HeaderComponent] MyAction
+this.actionsService.dispatch(this, MyAction, payload); 
+```
+We also added debug information to effects, to use it, just add at the end of the pipe: debugTypeMap('name$'): 
+
+```javascript
+    @Effect()
+    Load$ = this.update$.pipe(
+        ofAction(Load),
+        switchMap(() => this.myService.getAll()),
+        map(res => new LoadSuccess(res)),
+        debugTypeMap('Load$'),
+    );
+```
 ## Common Questions
 - _What about composition?_ Well since it creates a normal reducer function, you can still use all the same composition fns you already use.
 - _Will this work with normal Redux?_ While its designed for Angular and NGRX it would work perfectly fine for normal Redux. If that gets requested, I'll be happy to add better support too.
@@ -226,10 +254,6 @@ And you can start using it in any component. It also works with feature stores t
 - _Does this work with NGRX Dev Tools?_ Yes, it does.
 - _How does it work with testing?_ Everything should work the same way but don't forget if you use the selector tool to include that in your test runner though.
 
-## Donation
-If you like the project, you can give me a cup of coffee :)
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BA4EV8ALWCVYE&lc=US&item_name=NgrxActions&no_note=0&cn=Dodaj%20specjalne%20instrukcje%20dla%20sprzedaj%c4%85cego%3a&no_shipping=2&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 ## Community
 - [Reducing Boilerplate with NGRX-ACTIONS](https://medium.com/@amcdnl/reducing-the-boilerplate-with-ngrx-actions-8de42a190aac)
