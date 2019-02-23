@@ -225,14 +225,16 @@ And you can start using it in any component. It also works with feature stores t
 We introduced a new ActionsService which allow to dispatch actions with extra information about component which triggered the action. This helps a lot when you use the same action in multiple places and have to debug from where the action has been triggered. Let's say that we trigger an action from a HeaderComponent, in the Redux DevTools we will see "\[HeaderComponent\] MyAction".
 This looks like:
 ```javascript
-//just import the ActionsService 
+// just import the ActionsService 
 private actionsService: ActionsService,
-//sample action declaration
+// sample action declaration
 export class MyAction {
   readonly type = 'MyAction';
   constructor(public payload: MyObj) {}
 }
-//let's say we trigger the action from e.g. HeaderComponent, in the Redux DevTools we will see, [HeaderComponent] MyAction
+// let's say we trigger the action from e.g. HeaderComponent, 
+// in the Redux DevTools you will see:
+// [HeaderComponent] MyAction
 this.actionsService.dispatch(this, MyAction, payload); 
 ```
 We also added debug information to effects, to use it, just add at the end of the pipe: debugTypeMap('name$'): 
