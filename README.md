@@ -222,7 +222,7 @@ export class AppModule {}
 And you can start using it in any component. It also works with feature stores too. Note: The Select decorator has a limitation of lack of type checking due to [TypeScript#4881](https://github.com/Microsoft/TypeScript/issues/4881).
 
 ### Debug information 
-We introduced a new ActionsService which allow to dispatch actions with extra information about component which triggered the action. This helps a lot when you use the same action in multiple places and have to debug from where the action has been triggered. Let's say that we trigger an action from a HeaderComponent, in the Redux DevTools we will see "\[HeaderComponent\] MyAction".
+We introduced a new ActionsService which allow to dispatch actions with extra information about component which triggered the action. This helps a lot when you use the same action in multiple places and have to debug from where the action has been triggered. Let's say that we trigger an action from a HeaderComponent, in the Redux DevTools we will see "\[HeaderComponent\] MyAction". Of course you can still dispatch actions in a standard way, this is only an option if you need more debug information.
 This looks like:
 ```javascript
 // just import the ActionsService 
