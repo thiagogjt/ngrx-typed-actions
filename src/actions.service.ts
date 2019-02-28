@@ -27,12 +27,10 @@ export const debugTypeMap = (effect: string) => (source: Observable<any>): Obser
         return res;
       }
       if (res.type) {
-        res.type = `[${effect}] ${res.type}`;
-        return res;
+        return { ...res, type: `[${effect}] ${res.type}` };
       }
       if (res[0].type) {
-        res.map(action => (action.type = `[${effect}] ${action.type}`));
-        return res;
+        return { ...res }.map(action => (action.type = `[${effect}] ${action.type}`));
       }
     })
   );
